@@ -1,5 +1,5 @@
 #!/bin/bash
-KUBEADMIN_PASS=jCkHxvM4Li09jWIdPtOVMPerQpcMBPGBIhQpU-o3avQ
+KUBEADMIN_PASS=<PASSWD>
 
 oc new-project fooproject
 #
