@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: echo-overwrite-inputparam-task-run
+spec:
+  serviceAccount: pipeline
+  taskRef:
+    name: echo-inputparam-hello
+  inputs:
+    params:
+    - name: ECHO_STRING
+      value:
+      - chao

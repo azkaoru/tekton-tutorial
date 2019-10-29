@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: echo-inputparam-hello
+spec:
+  inputs:
+    params:
+      - name: ECHO_STRING
+        type: array
+        default:
+        - "hello"
+  steps:
+  - name: sleep
+    image: ubuntu
+    command:
+    - sleep 
+    args:
+    - "30"
+  - name: echo
+    image: ubuntu
+    command: ["echo"]
+    args:
+      - "$(inputs.params.ECHO_STRING)"
