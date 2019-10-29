@@ -7,6 +7,6 @@ spec:
   - name: echo
     image: ubuntu
     command:
-    - sleep 
+    - echo
     args:
-    - "300"
+    - "hello"
