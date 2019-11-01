@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: resource-example-taskrun
+spec:
+  serviceAccount: pipeline
+  taskRef:
+    name: resource-example-task
+  inputs:
+    resources:
+      - name: git-workspace
+        resourceRef:
+          name: java-git-resource
+    params:
+    - name: quayId
+      value: azkaoru
+    - name: quayPass
+      value: yourpass
+    - name: ocArgs
+      value: "get project"
+  outputs:
+    resources:
+      - name: app-image
+        resourceRef:
+          name: quay-app-image
+      - name: openshift-image
+        resourceRef:
+          name: openshift-app-image
