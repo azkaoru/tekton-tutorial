@@ -28,4 +28,4 @@ spec:
   type: image
   params:
   - name: url
-    value: "image-registry.openshift-image-registry.svc:5000/hello-tekton/tomcat9-jsp-counter"
+    value: "image-registry.openshift-image-registry.svc:5000/tomcat-cluster/tomcat9-jsp-counter"

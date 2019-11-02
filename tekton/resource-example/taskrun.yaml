@@ -15,9 +15,9 @@ spec:
     - name: quayId
       value: azkaoru
     - name: quayPass
-      value: yourpass
+      value: towa0817
     - name: ocArgs
-      value: "get project"
+      value: "apply -f /workspace/git-workspace/app.yaml"
   outputs:
     resources:
       - name: app-image
