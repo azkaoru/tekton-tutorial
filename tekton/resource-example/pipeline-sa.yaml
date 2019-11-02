@@ -7,7 +7,7 @@ metadata:
 type: kubernetes.io/basic-auth
 stringData:
   username: azkaoru
-  password: towa0817
+  password: yourpass
 ---
 apiVersion: v1
 kind: ServiceAccount

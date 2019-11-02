@@ -15,7 +15,7 @@ spec:
     - name: quayId
       value: azkaoru
     - name: quayPass
-      value: towa0817
+      value: yourpass
     - name: ocArgs
       value: "apply -f /workspace/git-workspace/app.yaml"
   outputs:
