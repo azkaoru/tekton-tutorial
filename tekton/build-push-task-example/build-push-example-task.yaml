@@ -1,0 +1,48 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: build-push-example-task
+spec:
+  inputs:
+    params:
+      - name: pathToPomFile
+        default: "/workspace/git-workspace/pom.xml"
+      - name: tlsverify
+        default: "false"
+    resources:
+      - name: git-workspace
+        type: git
+  outputs:
+    resources:
+      - name: openshift-image
+        type: image
+  steps:
+    - name: build-war
+      image: quay.io/azkaoru/maven354-java8-devel
+      command:
+      - mvn
+      args:
+        - -f
+        - $(inputs.params.pathToPomFile)
+        - clean
+        - package
+    - name: build-image
+      image: quay.io/buildah/stable
+      workingdir: /workspace/git-workspace
+      command: ['buildah', 'bud', '--tls-verify=$(inputs.params.tlsverify)', '--layers', '-f', '/workspace/git-workspace/Dockerfile', '-t', '$(outputs.resources.openshift-image.url)', '.']
+      volumeMounts:
+        - name: varlibcontainers
+          mountPath: /var/lib/containers
+      securityContext:
+        privileged: true
+    - name: push-image-to-openshift
+      image: quay.io/buildah/stable
+      command: ['buildah', 'push', '--tls-verify=$(inputs.params.tlsverify)', '$(outputs.resources.openshift-image.url)', 'docker://$(outputs.resources.openshift-image.url)']
+      volumeMounts:
+        - name: varlibcontainers
+          mountPath: /var/lib/containers
+      securityContext:
+        privileged: true
+  volumes:
+    - name: varlibcontainers
+      emptyDir: {}

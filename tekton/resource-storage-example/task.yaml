@@ -1,0 +1,33 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: resource-example-task
+spec:
+  inputs:
+    params:
+      - name: pathToPomFile
+        default: "/workspace/git-workspace/pom.xml"
+    resources:
+      - name: git-workspace
+        type: git
+  outputs:
+    resources:
+      - name: gcs-storage
+        type: storage
+  steps:
+    - name: build-war
+      image: quay.io/azkaoru/maven354-java8-devel
+      command:
+      - mvn
+      args:
+        - -f
+        - $(inputs.params.pathToPomFile)
+        - clean
+        - package
+    - name: cp-artifact 
+      image: ubuntu
+      command:
+      - cp
+      args:
+      - "/workspace/git-workspace/target/jsp-counter.war"
+      - "/workspace/output/storage-resource/jsp-counter.war"

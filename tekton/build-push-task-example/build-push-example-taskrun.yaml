@@ -1,0 +1,18 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: build-push-example-taskrun
+spec:
+  serviceAccount: pipeline
+  taskRef:
+    name: build-push-example-task 
+  inputs:
+    resources:
+      - name: git-workspace
+        resourceRef:
+          name: java-git-resource
+  outputs:
+    resources:
+      - name: openshift-image
+        resourceRef:
+          name: openshift-app-image

@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: java-git-resource
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/azkaoru/jsp-counter.git
+    - name: revision
+      value: master
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: openshift-app-image
+spec:
+  type: image
+  params:
+  - name: url
+    value: "image-registry.openshift-image-registry.svc:5000/build-push-test/tomcat9-jsp-counter"
