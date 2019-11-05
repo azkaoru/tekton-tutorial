@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+ name: build-deploy-openshift-example-pipelinerun
+spec:
+  pipelineRef:
+    name: build-deploy-openshift-example-pipeline
+  resources:
+    - name: app-git
+      resourceRef:
+        name: petclinic-git
+    - name: app-image
+      resourceRef:
+        name: petclinic-image
+  serviceAccount: pipeline
