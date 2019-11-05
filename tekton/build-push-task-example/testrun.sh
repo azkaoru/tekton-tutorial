@@ -14,6 +14,6 @@ oc adm policy add-role-to-user registry-editor -z pipeline
 #for pipeline resource
 oc create -f pipeline-resource.yaml
 #for task
-oc create -f task.yaml
+oc create -f build-push-example-task.yaml
 #for taskrun
-oc create -f taskrun.yaml 
+oc create -f build-push-example-taskrun.yaml 
