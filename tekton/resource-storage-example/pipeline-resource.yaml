@@ -1,0 +1,29 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: java-git-resource
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/azkaoru/jsp-counter.git
+    - name: revision
+      value: master
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: gcs-storage-resource
+spec:
+  type: storage
+  params:
+    - name: type
+      value: gcs
+    - name: location
+      value: gs://orzmybacket
+    - name: dir
+      value: "y"
+  secrets:
+    - fieldName: GOOGLE_APPLICATION_CREDENTIALS
+      secretName: bucket-sa
+      secretKey: service_account.json

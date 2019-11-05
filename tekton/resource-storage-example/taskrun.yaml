@@ -1,0 +1,18 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: resource-example-taskrun
+spec:
+  serviceAccount: pipeline
+  taskRef:
+    name: resource-example-task
+  inputs:
+    resources:
+      - name: git-workspace
+        resourceRef:
+          name: java-git-resource
+  outputs:
+    resources:
+      - name: gcs-storage
+        resourceRef:
+          name: gcs-storage-resource
