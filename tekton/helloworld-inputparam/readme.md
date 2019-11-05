@@ -27,3 +27,9 @@ taskrun.tekton.dev/echo-overwrite-inputparam-task-run created
 [echo] chao
 ```
 
+confirm taskrun's  status
+```
+# tkn taskrun list
+NAME                                 STARTED         DURATION     STATUS      
+echo-overwrite-inputparam-task-run   4 minutes ago   49 seconds   Succeeded
+```
