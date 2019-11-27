@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: helloworld-pipeline
+spec:
+  resources:
+  - name: git-workspace
+    type: git
+  tasks:
+  - name: hello
+    taskRef:
+      name: echo-hello-task
+  - name: world
+    taskRef:
+      name: cat-world-task
+    resources:
+      inputs:
+        - name: git-workspace
+          resource: git-workspace
+    runAfter:
+      - hello

@@ -1,0 +1,12 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+ name: helloworld-pipelinerun
+spec:
+  pipelineRef:
+    name: helloworld-pipeline
+  resources:
+    - name: git-workspace
+      resourceRef:
+        name: world-resource-git
+  serviceAccount: pipeline

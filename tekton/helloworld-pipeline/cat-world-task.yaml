@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: cat-world-task
+spec:
+  inputs:
+    params:
+      - name: CAT_TARGET 
+        default: "/workspace/git-workspace/README.md"
+    resources:
+      - name: git-workspace
+        type: git
+  steps:
+  - name: sleep
+    image: ubuntu
+    command:
+    - sleep
+    args:
+    - "0"
+  - name: cat
+    image: ubuntu
+    command: ["cat"]
+    args:
+      - "$(inputs.params.CAT_TARGET)"
